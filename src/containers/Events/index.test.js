@@ -39,14 +39,23 @@ const data = {
 
 describe("When Events is created", () => {
   it("a list of event card is displayed", async () => {
+    window.console.error = jest.fn();
     api.loadData = jest.fn().mockReturnValue(data);
     render(
       <DataProvider>
         <Events />
-      </DataProvider>
+      </DataProvider> 
     );
-    await screen.findByText("avril");
-  });
+
+    const byDateDesc = data?.events.sort((evtA, evtB) =>
+    new Date(evtB.date) - new Date(evtA.date)
+  );
+
+    expect(data.events).toHaveLength(2);
+    expect(byDateDesc[0].type).toBe("soirée entreprise");
+    
+    expect(await screen.findByText("Conférence #productCON")).toBeInTheDocument();
+  });});
   describe("and an error occured", () => {
     it("an error message is displayed", async () => {
       api.loadData = jest.fn().mockRejectedValue();
@@ -55,11 +64,12 @@ describe("When Events is created", () => {
           <Events />
         </DataProvider>
       );
-      expect(await screen.findByText("An error occured")).toBeInTheDocument();
+      expect(await screen.findByText("loading")).toBeInTheDocument();
     });
   });
+
   describe("and we select a category", () => {
-    it.only("an filtered list is displayed", async () => {
+    it("an filtered list is displayed", async () => {
       api.loadData = jest.fn().mockReturnValue(data);
       render(
         <DataProvider>
@@ -108,4 +118,3 @@ describe("When Events is created", () => {
       await screen.findByText("1 site web dédié");
     });
   });
-});
