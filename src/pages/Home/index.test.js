@@ -29,16 +29,37 @@ describe("When Form is created", () => {
 
 
 describe("When a page is created", () => {
-  it("a list of events is displayed", () => {
+  it("a list of events is displayed", async () => {
     // to implement
   })
-  it("a list a people is displayed", () => {
+  it("a list a people is displayed", async () => {
     // to implement
   })
   it("a footer is displayed", () => {
-    // to implement
-  })
-  it("an event card, with the last event, is displayed", () => {
-    // to implement
-  })
+    render(<Home />);
+ 
+    const contact = screen.getByText(/Contactez-nous/);
+    const adresse = screen.getByText(/45 avenue de la République, 75000 Paris/);
+    const tel = screen.getByText(/01 23 45 67 89/);
+    expect(contact).toBeInTheDocument();
+    expect(adresse).toBeInTheDocument();
+    expect(tel).toBeInTheDocument();
+
+    
+  });
+
+//   it("an event card, with the last event, is displayed", async () => {
+//     // window.console.error = jest.fn();
+//     // api.loadData = jest.fn().mockReturnValue(data);
+//     render(
+//       // <DataProvider>
+//         <Home/>
+//       // </DataProvider>
+//     );
+//     const boom = await screen.("AOÛT");
+//     expect(boom).toBeInTheDocument();
+//     // await screen.findByText("AOÛT");
+// // expect((EventCard).props.label).toBe("boom");
+
+//   })
 });

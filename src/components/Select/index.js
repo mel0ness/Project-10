@@ -16,14 +16,21 @@ const Select = ({
   const [value, setValue] = useState();
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    onChange();
+    
+    // SERIEUX????!!!!?????
+    onChange(newValue);
     setValue(newValue);
-    setCollapsed(newValue);
+
+    // Debug fermeture collapse en "toutes"
+    if(newValue) {setCollapsed(newValue)}
+    else {setCollapsed(true)}
+    
+    
   };
   return (
     <div className={`SelectContainer ${type}`} data-testid="select-testid">
       {label && <div className="label">{label}</div>}
-      <div className="Select">
+      <div className="Select" value={value}>
         <ul>
           <li className={collapsed ? "SelectTitle--show" : "SelectTitle--hide"}>
             {value || (!titleEmpty && "Toutes")}
@@ -83,6 +90,7 @@ const Arrow = () => (
 
 Select.propTypes = {
   selection: PropTypes.arrayOf(PropTypes.string).isRequired,
+
   onChange: PropTypes.func,
   name: PropTypes.string,
   titleEmpty: PropTypes.bool,
