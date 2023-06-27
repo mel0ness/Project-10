@@ -1,6 +1,8 @@
 @import "src/colors.scss";
 
 main {
+  // Problème de scroll à l'affichage du slider
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;

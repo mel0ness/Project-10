@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useData } from "../../contexts/DataContext";
 import { getMonth } from "../../helpers/Date";
 
+
 import "./style.scss";
 
 
@@ -15,12 +16,23 @@ const Slider = () => {
     // new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
     new Date(evtB.date) - new Date(evtA.date)
   );
+
+  const changeIdx = () => {
+    if (byDateDesc) {
+      setIndex(index < byDateDesc.length-1 ? index + 1 : 0)
+    }
+    else{
+      setIndex(0)
+    }
+  }
   
   const nextCard = () => {
     setTimeout(
       // Ajout du "-1" pour ne pas avoir une length de 3 comparée à un index commençant par 0
     
-      () => setIndex(index < byDateDesc.length-1 ? index + 1 : 0),
+      // Suppression de l'erreur console due au "length"
+      // () => setIndex(index < byDateDesc.length-1 ? index + 1 : 0),
+      () => changeIdx(),
       5000
     );
   };
@@ -48,14 +60,14 @@ const Slider = () => {
           </div>
           <div className="SlideCard__paginationContainer">
             <div className="SlideCard__pagination">
-              {byDateDesc.map((_, radioIdx) => (
+              {byDateDesc?.map((input, radioIdx) => (
                 <input
-                  key={radioIdx.id}
+                readOnly
+                key={input.id}
                   value={radioIdx}
                   type="radio"
                   name="radio-button" 
                   // idx n'est pas paramétré
-                  // checked={idx === radioIdx}
                    checked={index === radioIdx}
                 />
               ))}

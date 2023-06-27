@@ -13,7 +13,7 @@ import Modal from "../../containers/Modal";
 import { useData } from "../../contexts/DataContext";
 
 const Page = () => {
-// Est-ce normal?
+// Creation du last correctement!
   const { data } = useData();
     const byDate = data?.events.sort((evtA, evtB) =>
     new Date(evtB.date) - new Date(evtA.date)
