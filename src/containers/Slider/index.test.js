@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import Slider from "./index";
 import { api, DataProvider } from "../../contexts/DataContext";
 
-const data = {
+const data = { 
   focus: [
     {
       title: "World economic forum",
@@ -27,6 +27,18 @@ const data = {
 };
 
 describe("When slider is created", () => {
+  it("gives me the last event", () => {
+      window.console.error = jest.fn();
+      api.loadData = jest.fn().mockReturnValue(data);
+      
+      const byDateDesc = data?.focus.sort((evtA, evtB) =>
+        new Date(evtB.date) - new Date(evtA.date)
+      );
+    expect(byDateDesc[0].title).toBe("World Gaming Day");
+  });
+  it("Change the good value of index", () => {
+
+  });
   it("a list card is displayed", async () => {
     window.console.error = jest.fn();
     api.loadData = jest.fn().mockReturnValue(data);
@@ -40,5 +52,6 @@ describe("When slider is created", () => {
     await screen.findByText(
       "Oeuvre à la coopération entre le secteur public et le privé."
     );
+    await screen.findByText("World Gaming Day");
   });
 });

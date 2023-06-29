@@ -6,7 +6,6 @@ import { getMonth } from "../../helpers/Date";
 import "./style.scss";
 
 
-
 const Slider = () => {
   
   const { data } = useData();
@@ -16,7 +15,7 @@ const Slider = () => {
     // new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
     new Date(evtB.date) - new Date(evtA.date)
   );
-
+  
   const changeIdx = () => {
     if (byDateDesc) {
       setIndex(index < byDateDesc.length-1 ? index + 1 : 0)
@@ -78,5 +77,6 @@ const Slider = () => {
     </div>
   );
 };
+
 
 export default Slider;

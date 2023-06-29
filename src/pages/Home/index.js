@@ -17,9 +17,10 @@ const Page = () => {
   const { data } = useData();
     const byDate = data?.events.sort((evtA, evtB) =>
     new Date(evtB.date) - new Date(evtA.date)
-  );
+  ); 
   const last = byDate? byDate[0] : null;
-  return <>
+
+  return ( <>
     <header>
       <Menu />
     </header>
@@ -125,7 +126,7 @@ const Page = () => {
           imageSrc={last?.cover}
           title={last?.title}
           date={new Date(last?.date)}
-          small
+          small 
           label="boom"
         />
       </div>
@@ -159,7 +160,7 @@ const Page = () => {
         </p>
       </div>
     </footer>
-  </>
+  </>)
 }
 
 export default Page;
