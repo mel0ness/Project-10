@@ -3,6 +3,7 @@ import Home from "./index";
 import { api, DataProvider } from "../../contexts/DataContext";
 import EventCard from "../../components/EventCard";
 import EventList from "../../containers/Events";
+import { getMonth } from "../../helpers/Date";
 
 
 const data = {
@@ -146,17 +147,18 @@ afterEach(cleanup)
     
           render(
       <DataProvider>
-      <EventCard title={data.events[0].title} />
+      <EventCard title={data.events[0].title} date={new Date(data.events[0].date)} />
       </DataProvider>
     );
-
+    
     expect(data.events[0].title).toBe("Conférence #productCON")
+    expect(getMonth(new Date(data.events[0].date))).toBe("août")
 
 
-        const titleElement = await screen.findByText(data.events[0].title);
-
-
+        const titleElement = await screen.findByText("Conférence #productCON");
        expect(titleElement).toBeInTheDocument();
+       const dateElement = await screen.findByText("août")
+       expect(dateElement).toBeInTheDocument();
 
   })
 });
