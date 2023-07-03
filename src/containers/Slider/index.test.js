@@ -36,6 +36,16 @@ describe("When slider is created", () => {
       );
     expect(byDateDesc[0].title).toBe("World Gaming Day");
   });
+  it("gives me the last event 2", () => {
+      window.console.error = jest.fn();
+      api.loadData = jest.fn().mockReturnValue(data);
+      
+      const byDateDesc = data?.focus.sort((evtA, evtB) =>
+      new Date(evtA.date) < new Date(evtB.date) ? 1 : -1
+    );
+    expect(byDateDesc[0].title).toBe("World Gaming Day");
+  });
+  
   it("Change the good value of index", () => {
 
   });
