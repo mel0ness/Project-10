@@ -115,6 +115,7 @@ afterEach(cleanup)
   const last = byDate? byDate[0] : null;
 
   expect(last.id).toBe(4);
+  expect(last.type).toBe("conférence");
 
 });
 
